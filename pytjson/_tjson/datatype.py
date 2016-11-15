@@ -1,6 +1,8 @@
-import re, datetime
-from Helpers.freezable_list import FrozenDict
+import datetime
+import re
+from .Helpers.freezable_list import FrozenDict
 from pytjson.Exceptions import ParseError
+
 
 class Datatype:
     # Initializer, will be overriden below
@@ -93,13 +95,13 @@ class Binary(Scalar):
     pass
 
 
-from datatypes.string import String
-from datatypes.timestamp import Timestamp
-from datatypes.float import Float
-from datatypes.integer import SignedInt, UnsignedInt
-from datatypes.array import Array
-from datatypes.binary import Binary16, Binary32, Binary64
-from datatypes.object import Object
+from .datatypes.string import String
+from .datatypes.timestamp import Timestamp
+from .datatypes.float import Float
+from .datatypes.integer import SignedInt, UnsignedInt
+from .datatypes.array import Array
+from .datatypes.binary import Binary16, Binary32, Binary64
+from .datatypes.object import Object
 
 
 class Datatype(Datatype):

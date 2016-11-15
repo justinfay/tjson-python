@@ -19,9 +19,9 @@ class SignedInt(Integer):
 
         result = int(str_data, 10)
         if result > sys.maxint:
-            raise ParseError, "oversized integer: {}".format(result)
+            raise ParseError("oversized integer: {}".format(result))
         elif result < (-sys.maxint - 1):
-            raise ParseError, "undersized integer: {}".format(result)
+            raise ParseError("undersized integer: {}".format(result))
 
         return result
 

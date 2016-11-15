@@ -1,8 +1,10 @@
 # -*- encoding: utf-8 -*-
 
-import datetime, json, sys, re
-from _tjson.datatype import Datatype
-from Exceptions import EncodingError, ParseError
+import json
+import re
+from ._tjson.datatype import Datatype
+from .Exceptions import EncodingError, ParseError
+
 
 class tjson:
 
@@ -14,20 +16,20 @@ class tjson:
 
     @staticmethod
     def object_decoder(obj):
-            newobject = tjson.object()
-            for key, val in obj.iteritems():
+        newobject = tjson.object()
+        for key, val in obj.iteritems():
 
-                if not tjson.re_name_check.match(key):
-                    raise ParseError("Invalid tag: {}".format(repr(key)))
+            if not tjson.re_name_check.match(key):
+                raise ParseError("Invalid tag: {}".format(repr(key)))
 
-                name = tjson.re_name_check.match(key).group(1).encode("utf-8")
-                if name in newobject:
-                    raise ValueError("Duplicate key detected: %s" % repr(name))
+            name = tjson.re_name_check.match(key).group(1).encode("utf-8")
+            if name in newobject:
+                raise ValueError("Duplicate key detected: %s" % repr(name))
 
-                tag = tjson.re_name_check.match(key).group(2).encode("utf-8")
-                the_type = Datatype.parse(tag)
-                newobject[name] = the_type.convert(val)
-            return newobject
+            tag = tjson.re_name_check.match(key).group(2).encode("utf-8")
+            the_type = Datatype.parse(tag)
+            newobject[name] = the_type.convert(val)
+        return newobject
 
     def parse(self, string):
         try:
@@ -47,5 +49,3 @@ class tjson:
             raise TypeError
         tmp = Datatype()
         return tmp.datatype_generate(dict_string)
-
-
